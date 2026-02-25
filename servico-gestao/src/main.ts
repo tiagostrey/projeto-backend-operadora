@@ -1,10 +1,17 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 
+// Inicia a aplicação
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  // Definindo uma porta para o servidor
-  await app.listen(3000);
-  console.log('Servidor rodando em: http://localhost:3000');
+    // Cria a instância do servidor NestJS usando o módulo raiz (AppModule)
+    const app = await NestFactory.create(AppModule);
+
+    // Define a porta onde o servidor vai "escutar" as requisições
+    await app.listen(3000);
+
+    // Exibe uma mensagem no console para confirmar que o sistema está ativo
+    console.log('Servidor rodando em: http://localhost:3000');
 }
+
+// Chama a função para iniciar o processo
 bootstrap();

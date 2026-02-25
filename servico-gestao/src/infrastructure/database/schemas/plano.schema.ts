@@ -19,5 +19,12 @@ export const PlanoSchema = new EntitySchema<Plano>({
       precision: 10,
       scale: 2,
     },
+    data: {
+      type: Date,
+    },
+    descricao: {
+      type: String,
+      length: 1000
+    }
   },
 });

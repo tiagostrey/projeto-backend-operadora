@@ -1,13 +1,16 @@
 import { Assinatura } from '../../domain/entities/assinatura.entity';
 
 export interface IAssinaturaRepository {
-  // Busca todas as assinaturas para relatórios
-  findAll(): Promise<Assinatura[]>;
+    // Busca a lista completa, com todas as assinaturas cadastradas
+    findAll(): Promise<Assinatura[]>;
 
-  // Busca uma assinatura específica pelo código
-  findByCodigo(codigo: number): Promise<Assinatura | null>;
+    // Busca uma assinatura específica pelo código
+    // Se não achar nenhuma, devolve vazio (null).
+    findByCodigo(codigo: number): Promise<Assinatura | null>;
 
-  // Registra uma nova assinatura no sistema
-  // Retorna Promise<void> porque apenas confirma a execução, não retorna dados
-  create(assinatura: Assinatura): Promise<void>;
+    /**
+    * Grava uma assinatura nova no banco de dados.
+    * O 'void' significa que ele só vai salvar e não precisa devolver nenhuma informação para a tela.
+    */
+    create(assinatura: Assinatura): Promise<void>;
 }

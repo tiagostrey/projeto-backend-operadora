@@ -4,13 +4,13 @@ import { ClienteSchema } from './schemas/cliente.schema';
 import { AssinaturaSchema } from './schemas/assinatura.schema';
 
 export const typeOrmConfig: TypeOrmModuleOptions = {
-  type: 'sqlite',
-  database: 'database.sqlite',
-  synchronize: true,
-  logging: true,
-  entities: [
-    PlanoSchema,
-    ClienteSchema,
-    AssinaturaSchema,
-  ],
+    type: 'sqlite',
+    database: 'database.sqlite',
+    synchronize: true,
+    logging: true,
+    entities: [
+        PlanoSchema,
+        ClienteSchema,
+        AssinaturaSchema,
+    ],
 };
