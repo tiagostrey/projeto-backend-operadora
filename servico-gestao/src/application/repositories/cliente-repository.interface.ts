@@ -1,10 +1,14 @@
 import { Cliente } from '../../domain/entities/cliente.entity';
 
 export interface IClienteRepository {
-    // Busca a lista completa, ccom todos os clientes cadastrados
+    // Busca a lista completa, com todos os clientes cadastrados
     findAll(): Promise<Cliente[]>;
 
-    // Busca um cliente específico pelo código
+    // Busca um cliente específico pelo cpf
     // Se não achar nenhuma, devolve vazio (null).
-    findByCodigo(codigo: number): Promise<Cliente | null>;
+    findByCpf(cpf: string): Promise<Cliente | null>;
+
+    // Salva cadastro de novo cliente
+    salvar(cliente: Cliente): Promise<Cliente>;
+
 }
