@@ -5,6 +5,7 @@ import { ClienteRepository } from '../database/repositories/cliente.repository';
 import { ClienteController } from '../../interface/controllers/cliente.controller';
 import { CriarClienteUseCase } from '../../application/use-cases/criar-cliente.use-case';
 import { ListarClientesUseCase } from '../../application/use-cases/listar-clientes.use-case';
+import { AtualizarClienteUseCase } from '../../application/use-cases/atualizar-cliente.use-case'; // Novo
 
 @Module({
     imports: [TypeOrmModule.forFeature([ClienteSchema])],
@@ -12,11 +13,12 @@ import { ListarClientesUseCase } from '../../application/use-cases/listar-client
     providers: [
         CriarClienteUseCase,
         ListarClientesUseCase,
+        AtualizarClienteUseCase,
         {
             provide: 'IClienteRepository',
             useClass: ClienteRepository,
         },
     ],
-    exports: ['IClienteRepository'], // Importante para o módulo de Assinaturas depois
+    exports: ['IClienteRepository'],
 })
 export class ClientesModule { }

@@ -11,4 +11,7 @@ export interface IClienteRepository {
     // Salva cadastro de novo cliente
     salvar(cliente: Cliente): Promise<Cliente>;
 
+    // Atualiza cadastro de um cliente
+    atualizar(cliente: Cliente): Promise<Cliente>;
+
 }

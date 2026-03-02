@@ -14,7 +14,6 @@ export class ClienteRepository implements IClienteRepository {
 
     async findAll(): Promise<Cliente[]> {
         const schemas = await this.repository.find();
-        // Converte a lista de schemas para entidades de domínio
         return schemas.map(s => new Cliente(s.cpf, s.nome, s.email));
     }
 
@@ -25,7 +24,6 @@ export class ClienteRepository implements IClienteRepository {
     }
 
     async salvar(cliente: Cliente): Promise<Cliente> {
-        // Mapeia a Entidade para o Schema do TypeORM
         const novoSchema = this.repository.create({
             cpf: cliente.cpf,
             nome: cliente.nome,
@@ -33,6 +31,19 @@ export class ClienteRepository implements IClienteRepository {
         });
 
         await this.repository.save(novoSchema);
+        return cliente;
+    }
+
+    async atualizar(cliente: Cliente): Promise<Cliente> {
+        // O TypeORM reconhece o CPF (Primary Key). 
+        // Como ele já existe no banco, o comando 'save' fará um UPDATE automaticamente.
+        const schemaAtualizado = this.repository.create({
+            cpf: cliente.cpf,
+            nome: cliente.nome,
+            email: cliente.email
+        });
+
+        await this.repository.save(schemaAtualizado);
         return cliente;
     }
 }
