@@ -8,9 +8,9 @@ export interface IAssinaturaRepository {
     // Se não achar nenhuma, devolve vazio (null).
     findByCodigo(codigo: number): Promise<Assinatura | null>;
 
-    /**
-    * Grava uma assinatura nova no banco de dados.
-    * O 'void' significa que ele só vai salvar e não precisa devolver nenhuma informação para a tela.
-    */
-    create(assinatura: Assinatura): Promise<void>;
+    // Salva cadastro de nova assinatura
+    salvar(assinatura: Assinatura): Promise<Assinatura>;
+    
+    // Busca assinatura vinculada ao CPF do cliente
+    findByCpf(cpf: string): Promise<Assinatura | null>;
 }
