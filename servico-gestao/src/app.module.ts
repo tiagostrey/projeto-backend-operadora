@@ -3,19 +3,14 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { typeOrmConfig } from './infrastructure/database/typeorm.config';
 import { PlanosModule } from './infrastructure/modules/planos.module';
 import { ClientesModule } from './infrastructure/modules/clientes.module';
-import { ClienteSchema } from './infrastructure/database/schemas/cliente.schema';
-import { PlanoSchema } from './infrastructure/database/schemas/plano.schema';
+import { AssinaturasModule } from './infrastructure/modules/assinaturas.module'; // Novo
 
 @Module({
     imports: [
-        TypeOrmModule.forRoot({
-            ...typeOrmConfig,
-            entities: [PlanoSchema, ClienteSchema], 
-        }),
+        TypeOrmModule.forRoot(typeOrmConfig),
         PlanosModule,
         ClientesModule,
+        AssinaturasModule,
     ],
-    controllers: [],
-    providers: [],
 })
 export class AppModule { }

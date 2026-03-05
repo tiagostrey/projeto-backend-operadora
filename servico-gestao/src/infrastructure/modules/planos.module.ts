@@ -25,5 +25,8 @@ import { PlanoSchema } from '../database/schemas/plano.schema';
             useClass: PlanoRepository,
         },
     ],
+
+    // Torna o repositório visível para outros módulos (como o de Assinaturas)
+    exports: ['IPlanoRepository'],
 })
 export class PlanosModule { }
