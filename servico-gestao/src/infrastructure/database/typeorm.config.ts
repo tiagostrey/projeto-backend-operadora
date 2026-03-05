@@ -2,6 +2,7 @@ import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { PlanoSchema } from './schemas/plano.schema';
 import { ClienteSchema } from './schemas/cliente.schema';
 import { AssinaturaSchema } from './schemas/assinatura.schema';
+import { PagamentoSchema } from './schemas/pagamento.schema';
 
 export const typeOrmConfig: TypeOrmModuleOptions = {
     type: 'sqlite',
@@ -12,5 +13,6 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
         PlanoSchema,
         ClienteSchema,
         AssinaturaSchema,
+        PagamentoSchema,
     ],
 };

@@ -23,5 +23,7 @@ import { PlanosModule } from './planos.module';
             useClass: AssinaturaRepository,
         },
     ],
+    // Adicione esta linha abaixo para tornar o repositório público:
+    exports: ['IAssinaturaRepository'],
 })
 export class AssinaturasModule {}
