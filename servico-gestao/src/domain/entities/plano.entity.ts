@@ -1,9 +1,13 @@
 export class Plano {
-    constructor(
-        public readonly codigo: number | undefined,
-        public nome: string,
-        public custoMensal: number,
-        public data: Date,
-        public descricao: string
-    ) { }
+  codigo: number;
+  nome: string;
+  custoMensal: number;
+  data: Date;
+  descricao: string;
+
+  constructor(props?: Partial<Plano>) {
+    if (props) {
+      Object.assign(this, props);
+    }
+  }
 }

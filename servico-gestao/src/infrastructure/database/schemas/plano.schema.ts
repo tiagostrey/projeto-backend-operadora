@@ -4,27 +4,25 @@ import { Plano } from '../../../domain/entities/plano.entity';
 export const PlanoSchema = new EntitySchema<Plano>({
   name: 'Plano',
   target: Plano,
+  tableName: 'planos',
   columns: {
     codigo: {
-      type: Number,
+      type: 'integer',
       primary: true,
       generated: true,
     },
     nome: {
-      type: String,
-      length: 100,
+      type: 'varchar',
     },
     custoMensal: {
-      type: 'decimal',
-      precision: 10,
-      scale: 2,
+      type: 'float',
     },
     data: {
-      type: Date,
+      type: 'datetime',
+      updateDate: true,
     },
     descricao: {
-      type: String,
-      length: 1000
-    }
+      type: 'text',
+    },
   },
 });

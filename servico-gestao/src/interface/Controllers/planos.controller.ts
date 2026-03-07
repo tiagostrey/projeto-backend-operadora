@@ -1,32 +1,27 @@
-import { Controller, Post, Body, Get, Param } from '@nestjs/common';
-import { CriarPlanoUseCase } from '../../application/use-cases/criar-plano.use-case';
-import { CriarPlanoDto } from '../../application/dtos/criar-plano.dto';
+import { Controller, Get, Patch, Param, Body, ParseIntPipe } from '@nestjs/common';
 import { ListarPlanosUseCase } from '../../application/use-cases/listar-planos.use-case';
-import { BuscarPlanoPorCodigoUseCase } from '../../application/use-cases/buscar-plano.use-case';
+import { AtualizarCustoPlanoUseCase } from '../../application/use-cases/atualizar-custo-plano.use-case';
+import { AtualizarPlanoCustoDto } from '../../application/dtos/atualizar-plano-custo.dto';
 
-@Controller('planos')
+@Controller('gestao/planos')
 export class PlanosController {
     constructor(
-        private readonly criarPlanoUseCase: CriarPlanoUseCase,
         private readonly listarPlanosUseCase: ListarPlanosUseCase,
-        private readonly buscarPlanoPorCodigoUseCase: BuscarPlanoPorCodigoUseCase,
+        private readonly atualizarCustoUseCase: AtualizarCustoPlanoUseCase,
     ) { }
 
-    // Rota POST: Recebe dados no corpo da requisição para criar um novo plano
-    @Post()
-    async criar(@Body() dados: CriarPlanoDto) {
-        return await this.criarPlanoUseCase.executar(dados);
-    }
-
-    // Rota GET: Retorna a lista completa, com todos os planos cadastrados, ao acessar /planos
     @Get()
-    async listarTodos() {
-        return await this.listarPlanosUseCase.executar();
+    async listar() {
+        // Executa a lógica de listagem de todos os planos de assinatura disponíveis
+        return this.listarPlanosUseCase.executar();
     }
 
-    // Rota GET: Busca um plano por ID. O '+id' converte o texto da URL em número
-    @Get(':id')
-    async buscarPorId(@Param('id') id: string) {
-        return await this.buscarPlanoPorCodigoUseCase.executar(+id);
+    @Patch(':codigo')
+    async atualizarCusto(
+        @Param('codigo', ParseIntPipe) codigo: number,
+        @Body() dto: AtualizarPlanoCustoDto,
+    ) {
+        // Realiza a atualização do custo mensal de um plano identificado pelo código numérico
+        return this.atualizarCustoUseCase.executar(codigo, dto.custoMensal);
     }
 }

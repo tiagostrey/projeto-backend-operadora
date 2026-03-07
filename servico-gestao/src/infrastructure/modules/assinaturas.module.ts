@@ -1,29 +1,26 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AssinaturaSchema } from '../database/schemas/assinatura.schema';
-import { AssinaturaRepository } from '../database/repositories/assinatura.repository';
-import { AssinaturaController } from '../../interface/controllers/assinatura.controller';
+import { AssinaturasController } from '../../interface/controllers/assinatura.controller';
 import { CriarAssinaturaUseCase } from '../../application/use-cases/criar-assinatura.use-case';
-import { BuscarAssinaturasPorCpfUseCase } from '../../application/use-cases/buscar-assinaturas-por-cpf.use-case';
-import { ClientesModule } from './clientes.module';
-import { PlanosModule } from './planos.module';
+import { ListarAssinaturasPorTipoUseCase } from '../../application/use-cases/listar-assinaturas-por-tipo.use-case';
+import { ListarAssinaturasPorClienteUseCase } from '../../application/use-cases/listar-assinaturas-por-cliente.use-case';
+import { ListarAssinaturasPorPlanoUseCase } from '../../application/use-cases/listar-assinaturas-por-plano.use-case'; // Importado
+import { TypeOrmAssinaturaRepository } from '../database/repositories/typeorm-assinatura.repository';
 
 @Module({
-    imports: [
-        TypeOrmModule.forFeature([AssinaturaSchema]),
-        ClientesModule,
-        PlanosModule,
-    ],
-    controllers: [AssinaturaController],
+    imports: [TypeOrmModule.forFeature([AssinaturaSchema])],
+    controllers: [AssinaturasController],
     providers: [
         CriarAssinaturaUseCase,
-        BuscarAssinaturasPorCpfUseCase,
+        ListarAssinaturasPorTipoUseCase,
+        ListarAssinaturasPorClienteUseCase,
+        ListarAssinaturasPorPlanoUseCase, // Adicionado aqui
         {
             provide: 'IAssinaturaRepository',
-            useClass: AssinaturaRepository,
+            useClass: TypeOrmAssinaturaRepository,
         },
     ],
-    // Adicione esta linha abaixo para tornar o repositório público:
     exports: ['IAssinaturaRepository'],
 })
-export class AssinaturasModule {}
+export class AssinaturasModule { }

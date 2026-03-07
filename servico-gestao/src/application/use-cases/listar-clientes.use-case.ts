@@ -1,18 +1,17 @@
-import { Inject, Injectable } from '@nestjs/common';
-import { Cliente } from '../../domain/entities/cliente.entity';
+import { Injectable, Inject } from '@nestjs/common';
 import { IClienteRepository } from '../repositories/cliente-repository.interface';
+import { Cliente } from '../../domain/entities/cliente.entity';
 
 @Injectable()
 export class ListarClientesUseCase {
     constructor(
-        // Chama o contrato (interface) para acessar os dados dos clientes.
         @Inject('IClienteRepository')
         private readonly clienteRepository: IClienteRepository,
     ) { }
 
-    // Busca e devolve a lista completa de clientes cadastrados
+    // Executa a listagem de todos os clientes cadastrados
     async executar(): Promise<Cliente[]> {
-        // Aguarda o repositório buscar todos os registros no banco de dados
-        return await this.clienteRepository.findAll();
+        // Busca: Localiza todos os clientes através do repositório.
+        return this.clienteRepository.buscarTodos();
     }
 }

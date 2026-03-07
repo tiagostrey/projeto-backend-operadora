@@ -6,7 +6,7 @@ import { ValidationPipe } from '@nestjs/common';
 async function bootstrap() {
     // Cria a instância do servidor NestJS usando o módulo raiz (AppModule)
     const app = await NestFactory.create(AppModule);
-    
+
     // Ativa a validação automática para todos os DTOs
     app.useGlobalPipes(new ValidationPipe());
 

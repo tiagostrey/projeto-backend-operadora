@@ -1,24 +1,20 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ClienteSchema } from '../database/schemas/cliente.schema';
-import { ClienteRepository } from '../database/repositories/cliente.repository';
-import { ClienteController } from '../../interface/controllers/cliente.controller';
-import { CriarClienteUseCase } from '../../application/use-cases/criar-cliente.use-case';
+import { ClientesController } from '../../interface/controllers/cliente.controller';
 import { ListarClientesUseCase } from '../../application/use-cases/listar-clientes.use-case';
-import { AtualizarClienteUseCase } from '../../application/use-cases/atualizar-cliente.use-case'; // Novo
+import { TypeOrmClienteRepository } from '../database/repositories/typeorm-cliente.repository';
 
 @Module({
     imports: [TypeOrmModule.forFeature([ClienteSchema])],
-    controllers: [ClienteController],
+    controllers: [ClientesController], // O nome da classe exportada deve ser plural
     providers: [
-        CriarClienteUseCase,
         ListarClientesUseCase,
-        AtualizarClienteUseCase,
         {
             provide: 'IClienteRepository',
-            useClass: ClienteRepository,
+            useClass: TypeOrmClienteRepository,
         },
     ],
-    exports: ['IClienteRepository'],
+    exports: ['IClienteRepository'], // Exportado para o SeedService poder usar
 })
 export class ClientesModule { }

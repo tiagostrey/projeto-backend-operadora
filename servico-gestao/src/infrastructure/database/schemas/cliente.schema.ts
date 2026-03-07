@@ -1,13 +1,22 @@
-import { Entity, Column, PrimaryColumn } from 'typeorm';
+import { EntitySchema } from 'typeorm';
+import { Cliente } from '../../../domain/entities/cliente.entity';
 
-@Entity('clientes')
-export class ClienteSchema {
-    @PrimaryColumn()
-    cpf: string;
-
-    @Column()
-    nome: string;
-
-    @Column()
-    email: string;
-}
+export const ClienteSchema = new EntitySchema<Cliente>({
+  name: 'Cliente',
+  target: Cliente,
+  tableName: 'clientes',
+  columns: {
+    codigo: {
+      type: 'integer',
+      primary: true,
+      generated: true,
+    },
+    nome: {
+      type: 'varchar',
+    },
+    email: {
+      type: 'varchar',
+      unique: true,
+    },
+  },
+});

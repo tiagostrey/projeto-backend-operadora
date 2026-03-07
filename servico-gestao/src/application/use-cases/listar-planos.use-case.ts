@@ -1,18 +1,17 @@
-import { Inject, Injectable } from '@nestjs/common';
-import { Plano } from '../../domain/entities/plano.entity';
+import { Injectable, Inject } from '@nestjs/common';
 import { IPlanoRepository } from '../repositories/plano-repository.interface';
+import { Plano } from '../../domain/entities/plano.entity';
 
 @Injectable()
 export class ListarPlanosUseCase {
     constructor(
-        // Chama o contrato (interface) para acessar os dados dos planos.
         @Inject('IPlanoRepository')
         private readonly planoRepository: IPlanoRepository,
     ) { }
 
-    // Busca e devolve a lista completa de planos cadastrados
+    // Executa a listagem de todos os planos disponíveis
     async executar(): Promise<Plano[]> {
-        // Aguarda o repositório buscar todos os registros no banco de dados
-        return await this.planoRepository.findAll();
+        // Busca: Localiza todos os planos através do repositório.
+        return this.planoRepository.buscarTodos();
     }
 }

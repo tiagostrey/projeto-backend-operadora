@@ -1,25 +1,36 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { EntitySchema } from 'typeorm';
+import { Assinatura } from '../../../domain/entities/assinatura.entity';
 
-@Entity('assinaturas')
-export class AssinaturaSchema {
-    @PrimaryGeneratedColumn()
-    codAssinatura: number;
-
-    @Column()
-    codPlano: number;
-
-    @Column()
-    cpf: string;
-
-    @Column()
-    dataInicio: Date;
-
-    @Column({ nullable: true })
-    dataFim: Date;
-
-    @Column({ nullable: true })
-    dataUltimoPagamento: Date;
-
-    @Column()
-    status: boolean;
-}
+export const AssinaturaSchema = new EntitySchema<Assinatura>({
+  name: 'Assinatura',
+  target: Assinatura,
+  tableName: 'assinaturas',
+  columns: {
+    codigo: {
+      type: 'integer',
+      primary: true,
+      generated: true,
+    },
+    codPlano: {
+      type: 'integer',
+    },
+    codCli: {
+      type: 'integer',
+    },
+    inicioFidelidade: {
+      type: 'date',
+    },
+    fimFidelidade: {
+      type: 'date',
+    },
+    dataUltimoPagamento: {
+      type: 'date',
+    },
+    custoFinal: {
+      type: 'float',
+    },
+    descricao: {
+      type: 'text',
+    },
+  },
+});
