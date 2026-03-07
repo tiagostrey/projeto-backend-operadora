@@ -1,0 +1,250 @@
+{
+  "info": {
+    "_postman_id": "637212bb-5d0d-4873-a86d-a1ae24123e68",
+    "name": "ProjetoBackendFase1",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "52543907",
+    "_collection_link": "https://go.postman.co/collection/52543907-637212bb-5d0d-4873-a86d-a1ae24123e68?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Listar Clientes",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/gestao/clientes",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "gestao",
+            "clientes"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Listar Planos",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/gestao/planos",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "gestao",
+            "planos"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Criar Assinatura",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"codCli\": 1,\r\n  \"codPlano\": 1,\r\n  \"custoFinal\": 80.0,\r\n  \"descricao\": \"Assinatura via Postman\",\r\n  \"inicioFidelidade\": \"2026-03-06T00:00:00Z\",\r\n  \"fimFidelidade\": \"2027-03-06T00:00:00Z\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/gestao/assinaturas",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "gestao",
+            "assinaturas"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Atualiza Custo Mensal do Plano",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"custoMensal\": 80.0\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/gestao/planos/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "gestao",
+            "planos",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Lista Assinatura de um Tipo (TODOS)",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": {
+          "raw": "http://localhost:3000/gestao/assinaturas/todos",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "gestao",
+            "assinaturas",
+            "todos"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Lista Assinatura de um Tipo (CANCELADOS)",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": {
+          "raw": "http://localhost:3000/gestao/assinaturas/cancelados",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "gestao",
+            "assinaturas",
+            "cancelados"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Lista Assinatura de um Tipo (ATIVOS)",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": {
+          "raw": "http://localhost:3000/gestao/assinaturas/ATIVOS",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "gestao",
+            "assinaturas",
+            "ATIVOS"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Lista Assinaturas de um Cliente",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": {
+          "raw": "http://localhost:3000/gestao/assinaturascliente/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "gestao",
+            "assinaturascliente",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Lista Assinaturas de um Plano",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": {
+          "raw": "http://localhost:3000/gestao/assinaturasplano/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "gestao",
+            "assinaturasplano",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
