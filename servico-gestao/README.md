@@ -50,11 +50,11 @@ A base de todos os endpoints é prefixada por `/gestao`.
    `npm install`
 
 2. **Inicialização do servidor**:
-   `npm run start:dev`
+   `npm run start`
 
 O servidor será disponibilizado em `http://localhost:3000`. O banco de dados SQLite é gerado e sincronizado automaticamente na primeira execução através do **SeedService**.
 
 ## Validação e Testes
 
 Os testes de integração e validação das rotas devem ser realizados via **Postman**:
-1. Importar o arquivo `tiago_strey_Desenvolvimento_de_Sistemas_backend_Fase-1.postman_collection.json` localizado na raiz do projeto.
+Importar o arquivo `tiago_strey_Desenvolvimento_de_Sistemas_backend_Fase-1.postman_collection.json` localizado na raiz do projeto.
