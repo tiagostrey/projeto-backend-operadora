@@ -12,12 +12,6 @@ export class TypeOrmAssinaturaRepository implements IAssinaturaRepository {
         private readonly repository: Repository<Assinatura>,
     ) { }
 
-    // Persiste uma nova assinatura no banco de dados
-    async salvar(assinatura: Assinatura): Promise<Assinatura> {
-        // Grava os dados da assinatura na tabela correspondente.
-        return this.repository.save(assinatura);
-    }
-
     // Busca assinaturas filtrando por tipo de status
     async buscarPorTipo(tipo: string): Promise<Assinatura[]> {
         const hoje = new Date();
@@ -40,5 +34,11 @@ export class TypeOrmAssinaturaRepository implements IAssinaturaRepository {
     // Busca todas as assinaturas vinculadas a um plano
     async buscarPorPlano(codPlano: number): Promise<Assinatura[]> {
         return this.repository.find({ where: { codPlano } });
+    }
+    
+    // Persiste uma nova assinatura no banco de dados
+    async salvar(assinatura: Assinatura): Promise<Assinatura> {
+        // Grava os dados da assinatura na tabela correspondente.
+        return this.repository.save(assinatura);
     }
 }

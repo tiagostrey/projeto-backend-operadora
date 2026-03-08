@@ -11,7 +11,7 @@ export class PlanosController {
     ) { }
 
     @Get()
-    async listar() {
+    async listarTodos() {
         // Executa a lógica de listagem de todos os planos de assinatura disponíveis
         return this.listarPlanosUseCase.executar();
     }
