@@ -7,6 +7,7 @@ import { ListarAssinaturasPorTipoUseCase } from '../../application/use-cases/lis
 import { ListarAssinaturasPorClienteUseCase } from '../../application/use-cases/listar-assinaturas-por-cliente.use-case';
 import { ListarAssinaturasPorPlanoUseCase } from '../../application/use-cases/listar-assinaturas-por-plano.use-case';
 import { RegistrarPagamentoUseCase } from '../../application/use-cases/registrar-pagamento.use-case';
+import { VerificarAssinaturaAtivaUseCase } from '../../application/use-cases/verificar-assinatura-ativa.use-case';
 import { TypeOrmAssinaturaRepository } from '../database/repositories/typeorm-assinatura.repository';
 import { PagamentoConsumer } from '../messaging/pagamento.consumer';
 
@@ -19,6 +20,7 @@ import { PagamentoConsumer } from '../messaging/pagamento.consumer';
         ListarAssinaturasPorClienteUseCase,
         ListarAssinaturasPorPlanoUseCase,
         RegistrarPagamentoUseCase,
+        VerificarAssinaturaAtivaUseCase,
         {
             provide: 'IAssinaturaRepository',
             useClass: TypeOrmAssinaturaRepository,
