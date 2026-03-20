@@ -1,0 +1,13 @@
+# Dependências
+/node_modules
+
+# Compilação
+/dist
+
+# Configurações de ambiente e chaves
+.env
+
+# Arquivos do Sistema Operacional e Logs
+.DS_Store
+Thumbs.db
+*.log
