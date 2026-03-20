@@ -10,7 +10,7 @@ export class GatewayController {
   @Get('gestao/clientes')
   async listarClientes() {
     const resposta = await firstValueFrom(
-      this.httpService.get('http://localhost:3000/gestao/clientes'),
+      this.httpService.get('http://localhost:3001/gestao/clientes'),
     );
     return resposta.data;
   }
@@ -19,7 +19,7 @@ export class GatewayController {
   @Get('gestao/planos')
   async listarPlanos() {
     const resposta = await firstValueFrom(
-      this.httpService.get('http://localhost:3000/gestao/planos'),
+      this.httpService.get('http://localhost:3001/gestao/planos'),
     );
     return resposta.data;
   }
@@ -28,7 +28,7 @@ export class GatewayController {
   @Patch('gestao/planos/:codigo')
   async atualizarCustoPlano(@Param('codigo') codigo: string, @Body() body: any) {
     const resposta = await firstValueFrom(
-      this.httpService.patch(`http://localhost:3000/gestao/planos/${codigo}`, body),
+      this.httpService.patch(`http://localhost:3001/gestao/planos/${codigo}`, body),
     );
     return resposta.data;
   }
@@ -37,7 +37,7 @@ export class GatewayController {
   @Post('gestao/assinaturas')
   async criarAssinatura(@Body() body: any) {
     const resposta = await firstValueFrom(
-      this.httpService.post('http://localhost:3000/gestao/assinaturas', body),
+      this.httpService.post('http://localhost:3001/gestao/assinaturas', body),
     );
     return resposta.data;
   }
@@ -46,7 +46,7 @@ export class GatewayController {
   @Get('gestao/assinaturas/:tipo')
   async listarAssinaturasPorTipo(@Param('tipo') tipo: string) {
     const resposta = await firstValueFrom(
-      this.httpService.get(`http://localhost:3000/gestao/assinaturas/${tipo}`),
+      this.httpService.get(`http://localhost:3001/gestao/assinaturas/${tipo}`),
     );
     return resposta.data;
   }
@@ -55,7 +55,7 @@ export class GatewayController {
   @Get('gestao/assinaturascliente/:codcli')
   async listarAssinaturasPorCliente(@Param('codcli') codcli: string) {
     const resposta = await firstValueFrom(
-      this.httpService.get(`http://localhost:3000/gestao/assinaturascliente/${codcli}`),
+      this.httpService.get(`http://localhost:3001/gestao/assinaturascliente/${codcli}`),
     );
     return resposta.data;
   }
@@ -64,7 +64,7 @@ export class GatewayController {
   @Get('gestao/assinaturasplano/:codplano')
   async listarAssinaturasPorPlano(@Param('codplano') codplano: string) {
     const resposta = await firstValueFrom(
-      this.httpService.get(`http://localhost:3000/gestao/assinaturasplano/${codplano}`),
+      this.httpService.get(`http://localhost:3001/gestao/assinaturasplano/${codplano}`),
     );
     return resposta.data;
   }
@@ -73,7 +73,7 @@ export class GatewayController {
   @Post('registrarpagamento')
   async registrarPagamento(@Body() body: any) {
     const resposta = await firstValueFrom(
-      this.httpService.post('http://localhost:3001/registrarpagamento', body),
+      this.httpService.post('http://localhost:3002/registrarpagamento', body),
     );
     return resposta.data;
   }
@@ -82,7 +82,7 @@ export class GatewayController {
   @Get('planosativos/:codass')
   async verificarPlanoAtivo(@Param('codass') codass: string) {
     const resposta = await firstValueFrom(
-      this.httpService.get(`http://localhost:3002/planosativos/${codass}`),
+      this.httpService.get(`http://localhost:3003/planosativos/${codass}`),
     );
     return resposta.data;
   }

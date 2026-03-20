@@ -2,7 +2,6 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { Transport, MicroserviceOptions } from '@nestjs/microservices';
 
-// Inicia a aplicação
 async function bootstrap() {
     // Cria a instância do servidor NestJS usando o módulo raiz (AppModule)
     const app = await NestFactory.create(AppModule);
@@ -11,7 +10,7 @@ async function bootstrap() {
     app.connectMicroservice<MicroserviceOptions>({
         transport: Transport.RMQ,
         options: {
-            urls: ['amqp://guest:guest@localhost:5672'],
+            urls: [process.env.RABBITMQ_URL || 'amqp://guest:guest@localhost:5672'],
             queue: 'pagamento_gestao_queue',
             queueOptions: { durable: true },
         },
@@ -19,12 +18,10 @@ async function bootstrap() {
 
     await app.startAllMicroservices();
 
-    // Define a porta onde o servidor vai "escutar" as requisições
-    await app.listen(3000);
+    // Define a porta onde o ServicoGestao vai escutar as requisições
+    await app.listen(3001);
 
-    // Exibe uma mensagem no console para confirmar que o sistema está ativo
-    console.log('Servidor rodando em: http://localhost:3000');
+    console.log('ServicoGestao rodando em: http://localhost:3001');
 }
 
-// Chama a função para iniciar o processo
 bootstrap();

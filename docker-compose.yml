@@ -1,0 +1,15 @@
+servico-gestao:
+  ports:
+    - '3001:3001'
+
+servico-faturamento:
+  ports:
+    - '3002:3002'
+
+servico-planos-ativos:
+  ports:
+    - '3003:3003'
+
+api-gateway:
+  ports:
+    - '3000:3000'
