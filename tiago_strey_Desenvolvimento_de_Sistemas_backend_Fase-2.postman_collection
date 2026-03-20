@@ -54,7 +54,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n  \"codCli\": 1,\r\n  \"codPlano\": 1,\r\n  \"custoFinal\": 80.0,\r\n  \"descricao\": \"Assinatura via Postman\",\r\n  \"inicioFidelidade\": \"2026-03-06T00:00:00Z\",\r\n  \"fimFidelidade\": \"2027-03-06T00:00:00Z\"\r\n}",
+          "raw": "{\r\n  \"codCli\": 1,\r\n  \"codPlano\": 1,\r\n  \"custoFinal\": 80.0,\r\n  \"descricao\": \"Assinatura via Postman\",\r\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -240,6 +240,54 @@
           "path": [
             "gestao",
             "assinaturasplano",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Registrar Pagamento",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"dia\": 20,\r\n    \"mes\": 3,\r\n    \"ano\": 2026,\r\n    \"codAss\": 1,\r\n    \"valorPago\": 72.00\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/registrarpagamento",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "registrarpagamento"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Verificar Plano Ativo",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/planosativos/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "planosativos",
             "1"
           ]
         }
