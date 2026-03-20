@@ -41,4 +41,8 @@ export class TypeOrmAssinaturaRepository implements IAssinaturaRepository {
         // Grava os dados da assinatura na tabela correspondente.
         return this.repository.save(assinatura);
     }
+
+    async buscarPorCodigo(codigo: number): Promise<Assinatura | null> {
+        return this.repository.findOne({ where: { codigo } });
+    }
 }

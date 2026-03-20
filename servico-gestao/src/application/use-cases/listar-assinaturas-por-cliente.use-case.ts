@@ -8,19 +8,13 @@ export class ListarAssinaturasPorClienteUseCase {
         private readonly assinaturaRepository: IAssinaturaRepository,
     ) { }
 
-    // Executa a listagem de assinaturas de um cliente específico
     async executar(codCli: number): Promise<any[]> {
-        // Busca: Localiza as assinaturas associadas ao código do cliente através do repositório.
         const assinaturas = await this.assinaturaRepository.buscarPorCliente(codCli);
-        const hoje = new Date();
 
-        // Mapeamento: Converte as entidades para o formato JSON com acentuação conforme a especificação.
         return assinaturas.map(ass => {
-            const dataFim = new Date(ass.fimFidelidade);
-            const isAtivo = dataFim > hoje;
-
+            const isAtivo = this.verificarAtivo(ass.fimFidelidade, ass.dataUltimoPagamento);
             return {
-                "código assinatura": ass.codigo || ass.id,
+                "código assinatura": ass.codigo,
                 "código cliente": ass.codCli,
                 "código plano": ass.codPlano,
                 "data de início": ass.inicioFidelidade,
@@ -28,5 +22,15 @@ export class ListarAssinaturasPorClienteUseCase {
                 "status": isAtivo ? 'ATIVO' : 'CANCELADO'
             };
         });
+    }
+
+    // Verifica se a assinatura está ativa considerando fidelidade e último pagamento
+    private verificarAtivo(fimFidelidade: Date, dataUltimoPagamento: Date): boolean {
+        const hoje = new Date();
+        const fimValido = new Date(fimFidelidade) > hoje;
+        const diasSemPagamento = Math.floor(
+            (hoje.getTime() - new Date(dataUltimoPagamento).getTime()) / (1000 * 60 * 60 * 24)
+        );
+        return fimValido && diasSemPagamento <= 30;
     }
 }

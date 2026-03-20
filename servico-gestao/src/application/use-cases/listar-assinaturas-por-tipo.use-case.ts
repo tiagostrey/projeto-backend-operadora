@@ -8,28 +8,20 @@ export class ListarAssinaturasPorTipoUseCase {
         private readonly assinaturaRepository: IAssinaturaRepository,
     ) { }
 
-    // Executa a listagem de assinaturas filtradas por tipo
     async executar(tipo: string): Promise<any[]> {
-        // Preparação: Normaliza o parâmetro de entrada e define as opções válidas para filtragem.
         const tipoUpper = tipo.toUpperCase();
         const tiposValidos = ['TODOS', 'ATIVOS', 'CANCELADOS'];
 
-        // Validação: Garante que o tipo fornecido é aceito pelo sistema.
         if (!tiposValidos.includes(tipoUpper)) {
             throw new BadRequestException('Tipo inválido. Use TODOS, ATIVOS ou CANCELADOS.');
         }
 
-        // Busca: Localiza as assinaturas através do repositório baseada no tipo.
         const assinaturas = await this.assinaturaRepository.buscarPorTipo(tipoUpper);
-        const hoje = new Date();
 
-        // Mapeamento: Converte as entidades para o formato JSON com acentuação conforme a especificação.
         return assinaturas.map(ass => {
-            const dataFim = new Date(ass.fimFidelidade);
-            const isAtivo = dataFim > hoje;
-
+            const isAtivo = this.verificarAtivo(ass.fimFidelidade, ass.dataUltimoPagamento);
             return {
-                "código assinatura": ass.codigo || ass.id,
+                "código assinatura": ass.codigo,
                 "código cliente": ass.codCli,
                 "código plano": ass.codPlano,
                 "data de início": ass.inicioFidelidade,
@@ -37,5 +29,15 @@ export class ListarAssinaturasPorTipoUseCase {
                 "status": isAtivo ? 'ATIVO' : 'CANCELADO'
             };
         });
+    }
+
+    // Verifica se a assinatura está ativa considerando fidelidade e último pagamento
+    private verificarAtivo(fimFidelidade: Date, dataUltimoPagamento: Date): boolean {
+        const hoje = new Date();
+        const fimValido = new Date(fimFidelidade) > hoje;
+        const diasSemPagamento = Math.floor(
+            (hoje.getTime() - new Date(dataUltimoPagamento).getTime()) / (1000 * 60 * 60 * 24)
+        );
+        return fimValido && diasSemPagamento <= 30;
     }
 }
