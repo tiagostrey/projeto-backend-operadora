@@ -2,6 +2,7 @@ import { Injectable, Inject } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { firstValueFrom } from 'rxjs';
 
+// Verifica se uma assinatura está ativa
 @Injectable()
 export class ConsultarPlanoAtivoUseCase {
     // Cache em memória: chave = codAss, valor = boolean (ativo ou não)

@@ -6,6 +6,7 @@ import { ListarAssinaturasPorPlanoUseCase } from '../../application/use-cases/li
 import { VerificarAssinaturaAtivaUseCase } from '../../application/use-cases/verificar-assinatura-ativa.use-case';
 import { CriarAssinaturaDto } from '../../application/dtos/criar-assinatura.dto';
 
+// Controlador responsável pelos endpoints de gerenciamento de assinaturas
 @Controller('gestao')
 export class AssinaturasController {
     constructor(

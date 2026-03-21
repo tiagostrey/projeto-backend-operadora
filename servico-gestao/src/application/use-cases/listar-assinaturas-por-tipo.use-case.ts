@@ -9,6 +9,7 @@ export class ListarAssinaturasPorTipoUseCase {
     ) { }
 
     async executar(tipo: string): Promise<any[]> {
+        // Normaliza o tipo para maiúsculas e valida se é um valor aceito
         const tipoUpper = tipo.toUpperCase();
         const tiposValidos = ['TODOS', 'ATIVOS', 'CANCELADOS'];
 

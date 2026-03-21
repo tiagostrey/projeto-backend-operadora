@@ -4,15 +4,16 @@ import { ConsultarPlanoAtivoUseCase } from '../../application/use-cases/consulta
 import { PlanosAtivosController } from '../../interface/controllers/planos-ativos.controller';
 import { PagamentoConsumer } from '../messaging/pagamento.consumer';
 
+// Módulo responsável por consultar e informar se uma assinatura de plano está ativa
 @Module({
-  imports: [HttpModule],
-  controllers: [PlanosAtivosController, PagamentoConsumer],
-  providers: [
-    {
-      provide: 'HTTP_SERVICE',
-      useExisting: HttpService,
-    },
-    ConsultarPlanoAtivoUseCase,
-  ],
+    imports: [HttpModule],
+    controllers: [PlanosAtivosController, PagamentoConsumer],
+    providers: [
+        {
+            provide: 'HTTP_SERVICE',
+            useExisting: HttpService,
+        },
+        ConsultarPlanoAtivoUseCase,
+    ],
 })
-export class PlanosAtivosModule {}
+export class PlanosAtivosModule { }

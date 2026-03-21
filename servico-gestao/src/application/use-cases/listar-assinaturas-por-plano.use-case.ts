@@ -7,7 +7,7 @@ export class ListarAssinaturasPorPlanoUseCase {
         @Inject('IAssinaturaRepository')
         private readonly assinaturaRepository: IAssinaturaRepository,
     ) { }
-
+    // Busca e retorna todas as assinaturas do plano informado com o status calculado
     async executar(codPlano: number): Promise<any[]> {
         const assinaturas = await this.assinaturaRepository.buscarPorPlano(codPlano);
 

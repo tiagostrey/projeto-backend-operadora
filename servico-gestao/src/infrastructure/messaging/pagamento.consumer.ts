@@ -2,6 +2,7 @@ import { Controller } from '@nestjs/common';
 import { EventPattern, Payload } from '@nestjs/microservices';
 import { RegistrarPagamentoUseCase } from '../../application/use-cases/registrar-pagamento.use-case';
 
+// Consumidor responsável por escutar eventos de pagamento vindos do RabbitMQ
 @Controller()
 export class PagamentoConsumer {
     constructor(
@@ -10,6 +11,7 @@ export class PagamentoConsumer {
 
     // Consome o evento de pagamento enviado pelo ServicoFaturamento via RabbitMQ
     @EventPattern('PagamentoPlanoServicoGestao')
+    // Reconstrói a data de pagamento e aciona o use case para atualizar a assinatura
     async handlePagamento(@Payload() data: any) {
         const dataPagamento = new Date(data.ano, data.mes - 1, data.dia);
         await this.registrarPagamentoUseCase.executar(data.codAss, dataPagamento);

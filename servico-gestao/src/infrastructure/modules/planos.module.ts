@@ -6,6 +6,7 @@ import { ListarPlanosUseCase } from '../../application/use-cases/listar-planos.u
 import { AtualizarCustoPlanoUseCase } from '../../application/use-cases/atualizar-custo-plano.use-case';
 import { TypeOrmPlanoRepository } from '../database/repositories/typeorm-plano.repository';
 
+// Módulo responsável por gerenciar os planos disponíveis para assinatura
 @Module({
     imports: [TypeOrmModule.forFeature([PlanoSchema])],
     controllers: [PlanosController],

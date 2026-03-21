@@ -14,6 +14,7 @@ import { AssinaturasModule } from './infrastructure/modules/assinaturas.module';
 // Seed
 import { SeedService } from './infrastructure/database/seed.service';
 
+// Módulo raiz do ServicoGestao — configura o banco de dados, módulos e o seed inicial
 @Module({
     imports: [
         // Configuração da conexão com o banco de dados e sincronização de esquemas

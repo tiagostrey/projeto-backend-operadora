@@ -1,6 +1,7 @@
 import { Controller, Get } from '@nestjs/common';
 import { ListarClientesUseCase } from '../../application/use-cases/listar-clientes.use-case';
 
+// Controlador responsável pelo endpoint de listagem de clientes
 @Controller('gestao/clientes')
 export class ClientesController {
     constructor(private readonly listarClientesUseCase: ListarClientesUseCase) { }

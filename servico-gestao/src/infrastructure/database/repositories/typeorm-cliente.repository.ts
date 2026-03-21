@@ -5,12 +5,13 @@ import { IClienteRepository } from '../../../application/repositories/cliente-re
 import { ClienteSchema } from '../schemas/cliente.schema';
 import { Cliente } from '../../../domain/entities/cliente.entity';
 
+// Implementação do repositório de clientes
 @Injectable()
 export class TypeOrmClienteRepository implements IClienteRepository {
   constructor(
     @InjectRepository(ClienteSchema)
     private readonly repository: Repository<Cliente>,
-  ) {}
+  ) { }
 
   // Busca todos os clientes cadastrados na tabela
   async buscarTodos(): Promise<Cliente[]> {

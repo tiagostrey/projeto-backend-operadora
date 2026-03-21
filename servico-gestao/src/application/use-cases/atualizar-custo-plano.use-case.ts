@@ -21,7 +21,7 @@ export class AtualizarCustoPlanoUseCase {
 
         // Alteração: Altera o estado interno da entidade de domínio.
         plano.custoMensal = novoCusto;
-        
+
         // Persistência: Devolve a entidade alterada para o repositório salvar no banco.
         return this.planoRepository.salvar(plano);
     }

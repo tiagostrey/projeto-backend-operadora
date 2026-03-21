@@ -5,6 +5,7 @@ import { IAssinaturaRepository } from '../../../application/repositories/assinat
 import { AssinaturaSchema } from '../schemas/assinatura.schema';
 import { Assinatura } from '../../../domain/entities/assinatura.entity';
 
+// Implementação do repositório de assinaturas
 @Injectable()
 export class TypeOrmAssinaturaRepository implements IAssinaturaRepository {
     constructor(
@@ -35,13 +36,13 @@ export class TypeOrmAssinaturaRepository implements IAssinaturaRepository {
     async buscarPorPlano(codPlano: number): Promise<Assinatura[]> {
         return this.repository.find({ where: { codPlano } });
     }
-    
+
     // Persiste uma nova assinatura no banco de dados
     async salvar(assinatura: Assinatura): Promise<Assinatura> {
         // Grava os dados da assinatura na tabela correspondente.
         return this.repository.save(assinatura);
     }
-
+    // Busca uma assinatura específica pelo seu código identificador
     async buscarPorCodigo(codigo: number): Promise<Assinatura | null> {
         return this.repository.findOne({ where: { codigo } });
     }

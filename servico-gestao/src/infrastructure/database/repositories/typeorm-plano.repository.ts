@@ -5,6 +5,7 @@ import { IPlanoRepository } from '../../../application/repositories/plano-reposi
 import { PlanoSchema } from '../schemas/plano.schema';
 import { Plano } from '../../../domain/entities/plano.entity';
 
+// Implementação do repositório de planos
 @Injectable()
 export class TypeOrmPlanoRepository implements IPlanoRepository {
     constructor(

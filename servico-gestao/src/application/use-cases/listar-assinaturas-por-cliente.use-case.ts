@@ -7,7 +7,7 @@ export class ListarAssinaturasPorClienteUseCase {
         @Inject('IAssinaturaRepository')
         private readonly assinaturaRepository: IAssinaturaRepository,
     ) { }
-
+    // Busca e retorna todas as assinaturas do cliente informado com o status calculado
     async executar(codCli: number): Promise<any[]> {
         const assinaturas = await this.assinaturaRepository.buscarPorCliente(codCli);
 

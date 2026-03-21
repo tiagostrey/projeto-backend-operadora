@@ -11,6 +11,7 @@ import { VerificarAssinaturaAtivaUseCase } from '../../application/use-cases/ver
 import { TypeOrmAssinaturaRepository } from '../database/repositories/typeorm-assinatura.repository';
 import { PagamentoConsumer } from '../messaging/pagamento.consumer';
 
+// Módulo responsável por gerenciar as assinaturas e consumir eventos de pagamento
 @Module({
     imports: [TypeOrmModule.forFeature([AssinaturaSchema])],
     controllers: [AssinaturasController, PagamentoConsumer],

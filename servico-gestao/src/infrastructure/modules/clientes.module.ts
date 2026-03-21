@@ -5,6 +5,7 @@ import { ClientesController } from '../../interface/controllers/cliente.controll
 import { ListarClientesUseCase } from '../../application/use-cases/listar-clientes.use-case';
 import { TypeOrmClienteRepository } from '../database/repositories/typeorm-cliente.repository';
 
+// Módulo responsável por gerenciar os clientes cadastrados no sistema
 @Module({
     imports: [TypeOrmModule.forFeature([ClienteSchema])],
     controllers: [ClientesController], // O nome da classe exportada deve ser plural

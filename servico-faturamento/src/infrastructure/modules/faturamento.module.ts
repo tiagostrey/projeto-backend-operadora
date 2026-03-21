@@ -6,29 +6,30 @@ import { PagamentoController } from '../../interface/controllers/pagamento.contr
 import { RegistrarPagamentoUseCase } from '../../application/use-cases/registrar-pagamento.use-case';
 import { TypeOrmPagamentoRepository } from '../database/repositories/typeorm-pagamento.repository';
 
+// Módulo responsável por registrar pagamentos e notificar os demais serviços via RabbitMQ
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([PagamentoSchema]),
-    // Configura o cliente RabbitMQ para publicação de eventos
-    ClientsModule.register([
-      {
-        name: 'RABBITMQ_CLIENT',
-        transport: Transport.RMQ,
-        options: {
-          urls: ['amqp://guest:guest@localhost:5672'],
-          queue: 'pagamento_gestao_queue',
-          queueOptions: { durable: true },
+    imports: [
+        TypeOrmModule.forFeature([PagamentoSchema]),
+        // Configura o cliente RabbitMQ para publicação de eventos
+        ClientsModule.register([
+            {
+                name: 'RABBITMQ_CLIENT',
+                transport: Transport.RMQ,
+                options: {
+                    urls: ['amqp://guest:guest@localhost:5672'],
+                    queue: 'pagamento_gestao_queue',
+                    queueOptions: { durable: true },
+                },
+            },
+        ]),
+    ],
+    controllers: [PagamentoController],
+    providers: [
+        RegistrarPagamentoUseCase,
+        {
+            provide: 'IPagamentoRepository',
+            useClass: TypeOrmPagamentoRepository,
         },
-      },
-    ]),
-  ],
-  controllers: [PagamentoController],
-  providers: [
-    RegistrarPagamentoUseCase,
-    {
-      provide: 'IPagamentoRepository',
-      useClass: TypeOrmPagamentoRepository,
-    },
-  ],
+    ],
 })
-export class FaturamentoModule {}
+export class FaturamentoModule { }

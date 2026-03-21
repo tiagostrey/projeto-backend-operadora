@@ -5,15 +5,16 @@ import { IPagamentoRepository } from '../../../application/repositories/pagament
 import { PagamentoSchema } from '../schemas/pagamento.schema';
 import { Pagamento } from '../../../domain/entities/pagamento.entity';
 
+// Implementação concreta do repositório de pagamentos usando o TypeORM
 @Injectable()
 export class TypeOrmPagamentoRepository implements IPagamentoRepository {
-  constructor(
-    @InjectRepository(PagamentoSchema)
-    private readonly repository: Repository<Pagamento>,
-  ) {}
+    constructor(
+        @InjectRepository(PagamentoSchema)
+        private readonly repository: Repository<Pagamento>,
+    ) { }
 
-  // Persiste o pagamento na base de dados do serviço de faturamento
-  async salvar(pagamento: Pagamento): Promise<Pagamento> {
-    return this.repository.save(pagamento);
-  }
+    // Persiste o pagamento na base de dados do serviço de faturamento
+    async salvar(pagamento: Pagamento): Promise<Pagamento> {
+        return this.repository.save(pagamento);
+    }
 }

@@ -6,13 +6,15 @@ import { Cliente } from '../../domain/entities/cliente.entity';
 import { Plano } from '../../domain/entities/plano.entity';
 import { Assinatura } from '../../domain/entities/assinatura.entity';
 
+// Serviço responsável por popular o banco com dados iniciais ao iniciar a aplicação
 @Injectable()
+// Executa o seed apenas se o banco ainda não tiver dados
 export class SeedService implements OnApplicationBootstrap {
     constructor(
         @Inject('IClienteRepository') private readonly clienteRepo: IClienteRepository,
         @Inject('IPlanoRepository') private readonly planoRepo: IPlanoRepository,
         @Inject('IAssinaturaRepository') private readonly assinaturaRepo: IAssinaturaRepository,
-    ) {}
+    ) { }
 
     async onApplicationBootstrap() {
         const planos = await this.planoRepo.buscarTodos();
@@ -48,7 +50,7 @@ export class SeedService implements OnApplicationBootstrap {
 
         // 3. Seed de Assinaturas (Datas controladas para teste)
         const hoje = new Date();
-        
+
         const umAnoAtras = new Date();
         umAnoAtras.setFullYear(hoje.getFullYear() - 1);
 
@@ -60,7 +62,7 @@ export class SeedService implements OnApplicationBootstrap {
 
         for (let i = 0; i < 5; i++) {
             // Canceladas (IDs 1, 2, 3) | Ativas (IDs 4, 5)
-            const isCancelada = i < 3; 
+            const isCancelada = i < 3;
 
             const dataInicio = isCancelada ? doisAnosAtras : hoje;
             const dataFim = isCancelada ? umAnoAtras : umAnoNoFuturo;
@@ -71,8 +73,8 @@ export class SeedService implements OnApplicationBootstrap {
                 inicioFidelidade: dataInicio,
                 fimFidelidade: dataFim,
                 custoFinal: planos[i].custoMensal * 0.9,
-                descricao: isCancelada 
-                    ? 'Assinatura antiga já encerrada' 
+                descricao: isCancelada
+                    ? 'Assinatura antiga já encerrada'
                     : 'Assinatura ativa com fidelidade',
                 dataUltimoPagamento: dataInicio
             });

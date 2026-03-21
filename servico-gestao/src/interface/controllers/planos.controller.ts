@@ -3,6 +3,7 @@ import { ListarPlanosUseCase } from '../../application/use-cases/listar-planos.u
 import { AtualizarCustoPlanoUseCase } from '../../application/use-cases/atualizar-custo-plano.use-case';
 import { AtualizarPlanoCustoDto } from '../../application/dtos/atualizar-plano-custo.dto';
 
+// Controlador responsável pelos endpoints de gerenciamento de planos
 @Controller('gestao/planos')
 export class PlanosController {
     constructor(

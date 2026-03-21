@@ -6,7 +6,7 @@ import { firstValueFrom } from 'rxjs';
 export class GatewayController {
     constructor(private readonly httpService: HttpService) { }
 
-    // Rota: listar todos os clientes
+    // Encaminha a requisição para o ServicoGestao e retorna a lista de clientes cadastrados
     @Get('gestao/clientes')
     async listarClientes() {
         const resposta = await firstValueFrom(
@@ -15,7 +15,7 @@ export class GatewayController {
         return resposta.data;
     }
 
-    // Rota: listar todos os planos
+    // Encaminha a requisição para o ServicoGestao e retorna a lista de planos disponíveis
     @Get('gestao/planos')
     async listarPlanos() {
         const resposta = await firstValueFrom(
@@ -24,7 +24,7 @@ export class GatewayController {
         return resposta.data;
     }
 
-    // Rota: atualizar custo mensal de um plano
+    // Encaminha a atualização do custo mensal do plano para o ServicoGestao
     @Patch('gestao/planos/:codigo')
     async atualizarCustoPlano(@Param('codigo') codigo: string, @Body() body: any) {
         const resposta = await firstValueFrom(
@@ -33,7 +33,7 @@ export class GatewayController {
         return resposta.data;
     }
 
-    // Rota: criar uma assinatura
+    // Encaminha a criação de uma nova assinatura para o ServicoGestao
     @Post('gestao/assinaturas')
     async criarAssinatura(@Body() body: any) {
         const resposta = await firstValueFrom(
@@ -42,7 +42,7 @@ export class GatewayController {
         return resposta.data;
     }
 
-    // Rota: listar assinaturas por tipo (TODOS, ATIVOS, CANCELADOS)
+    // Encaminha a requisição para o ServicoGestao filtrando assinaturas por tipo (TODOS, ATIVOS, CANCELADOS)
     @Get('gestao/assinaturas/:tipo')
     async listarAssinaturasPorTipo(@Param('tipo') tipo: string) {
         const resposta = await firstValueFrom(
@@ -51,7 +51,7 @@ export class GatewayController {
         return resposta.data;
     }
 
-    // Rota: listar assinaturas de um cliente
+    // Encaminha a requisição para o ServicoGestao retornando as assinaturas de um cliente específico
     @Get('gestao/assinaturascliente/:codcli')
     async listarAssinaturasPorCliente(@Param('codcli') codcli: string) {
         const resposta = await firstValueFrom(
@@ -60,7 +60,7 @@ export class GatewayController {
         return resposta.data;
     }
 
-    // Rota: listar assinaturas de um plano
+    // Encaminha a requisição para o ServicoGestao retornando os assinantes de um plano específico
     @Get('gestao/assinaturasplano/:codplano')
     async listarAssinaturasPorPlano(@Param('codplano') codplano: string) {
         const resposta = await firstValueFrom(
@@ -69,7 +69,7 @@ export class GatewayController {
         return resposta.data;
     }
 
-    // Rota: registrar pagamento — encaminha para o ServicoFaturamento
+    // Encaminha o registro de pagamento para o ServicoFaturamento
     @Post('registrarpagamento')
     async registrarPagamento(@Body() body: any) {
         const resposta = await firstValueFrom(
@@ -78,7 +78,7 @@ export class GatewayController {
         return resposta.data;
     }
 
-    // Rota: verificar se plano está ativo — encaminha para o ServicoPlanosAtivos
+    // Encaminha a consulta de plano ativo para o ServicoPlanosAtivos
     @Get('planosativos/:codass')
     async verificarPlanoAtivo(@Param('codass') codass: string) {
         const resposta = await firstValueFrom(

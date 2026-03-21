@@ -15,4 +15,4 @@ import { FaturamentoModule } from './infrastructure/modules/faturamento.module';
     FaturamentoModule,
   ],
 })
-export class AppModule {}
+export class AppModule { }
