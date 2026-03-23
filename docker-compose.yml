@@ -1,15 +1,62 @@
-servico-gestao:
-  ports:
-    - '3001:3001'
+version: '3.8'
 
-servico-faturamento:
-  ports:
-    - '3002:3002'
+services:
+  # Message Broker para comunicação assíncrona entre os serviços
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - '5672:5672'   # porta de comunicação dos serviços
+      - '15672:15672' # porta do painel de administração
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
 
-servico-planos-ativos:
-  ports:
-    - '3003:3003'
+  # Serviço principal de gestão
+  servico-gestao:
+    build:
+      context: ./servico-gestao
+    container_name: servico-gestao
+    ports:
+      - '3001:3001'
+    depends_on:
+      - rabbitmq
+    environment:
+      RABBITMQ_URL: amqp://guest:guest@rabbitmq:5672
 
-api-gateway:
-  ports:
-    - '3000:3000'
+  # Microsserviço de faturamento
+  servico-faturamento:
+    build:
+      context: ./servico-faturamento
+    container_name: servico-faturamento
+    ports:
+      - '3002:3002'
+    depends_on:
+      - rabbitmq
+    environment:
+      RABBITMQ_URL: amqp://guest:guest@rabbitmq:5672
+
+  # Microsserviço de consulta de planos ativos
+  servico-planos-ativos:
+    build:
+      context: ./servico-planos-ativos
+    container_name: servico-planos-ativos
+    ports:
+      - '3003:3003'
+    depends_on:
+      - rabbitmq
+      - servico-gestao
+    environment:
+      RABBITMQ_URL: amqp://guest:guest@rabbitmq:5672
+
+  # API Gateway — ponto de entrada único na porta 3000
+  api-gateway:
+    build:
+      context: ./api-gateway
+    container_name: api-gateway
+    ports:
+      - '3000:3000'
+    depends_on:
+      - servico-gestao
+      - servico-faturamento
+      - servico-planos-ativos
