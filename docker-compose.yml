@@ -23,6 +23,8 @@ services:
       - rabbitmq
     environment:
       RABBITMQ_URL: amqp://guest:guest@rabbitmq:5672
+    volumes:
+      - gestao_data:/app/database.sqlite
 
   # Microsserviço de faturamento
   servico-faturamento:
@@ -35,6 +37,8 @@ services:
       - rabbitmq
     environment:
       RABBITMQ_URL: amqp://guest:guest@rabbitmq:5672
+    volumes:
+      - faturamento_data:/app/faturamento.sqlite
 
   # Microsserviço de consulta de planos ativos
   servico-planos-ativos:
@@ -60,3 +64,7 @@ services:
       - servico-gestao
       - servico-faturamento
       - servico-planos-ativos
+
+volumes:
+  gestao_data:
+  faturamento_data:
