@@ -16,17 +16,13 @@ export class VerificarAssinaturaAtivaUseCase {
             throw new NotFoundException(`Assinatura ${codAss} não encontrada.`);
         }
 
-        const hoje = new Date();
-
-        // Verifica se o período de fidelidade ainda está vigente
-        const fimValido = new Date(assinatura.fimFidelidade) > hoje;
-
         // Verifica se o último pagamento foi há menos de 30 dias
+        const hoje = new Date();
         const diasSemPagamento = Math.floor(
             (hoje.getTime() - new Date(assinatura.dataUltimoPagamento).getTime()) /
             (1000 * 60 * 60 * 24),
         );
 
-        return fimValido && diasSemPagamento <= 30;
+        return diasSemPagamento <= 30;
     }
 }

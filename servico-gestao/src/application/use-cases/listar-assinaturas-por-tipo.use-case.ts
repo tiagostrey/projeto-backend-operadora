@@ -20,7 +20,7 @@ export class ListarAssinaturasPorTipoUseCase {
         const assinaturas = await this.assinaturaRepository.buscarPorTipo(tipoUpper);
 
         return assinaturas.map(ass => {
-            const isAtivo = this.verificarAtivo(ass.fimFidelidade, ass.dataUltimoPagamento);
+            const isAtivo = this.verificarAtivo(ass.dataUltimoPagamento);
             return {
                 "código assinatura": ass.codigo,
                 "código cliente": ass.codCli,
@@ -32,13 +32,12 @@ export class ListarAssinaturasPorTipoUseCase {
         });
     }
 
-    // Verifica se a assinatura está ativa considerando fidelidade e último pagamento
-    private verificarAtivo(fimFidelidade: Date, dataUltimoPagamento: Date): boolean {
+    // Verifica se a assinatura está ativa com base no último pagamento (máximo 30 dias)
+    private verificarAtivo(dataUltimoPagamento: Date): boolean {
         const hoje = new Date();
-        const fimValido = new Date(fimFidelidade) > hoje;
         const diasSemPagamento = Math.floor(
             (hoje.getTime() - new Date(dataUltimoPagamento).getTime()) / (1000 * 60 * 60 * 24)
         );
-        return fimValido && diasSemPagamento <= 30;
+        return diasSemPagamento <= 30;
     }
 }
