@@ -11,3 +11,6 @@
 .DS_Store
 Thumbs.db
 *.log
+
+# Database files
+*.sqlite
