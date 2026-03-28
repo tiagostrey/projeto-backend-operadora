@@ -21,7 +21,7 @@ export class ConsultarPlanoAtivoUseCase {
         }
 
         // Consulta o ServicoGestao de forma síncrona quando não há cache
-        const url = `http://localhost:3001/gestao/assinatura/${codAss}/ativo`;
+        const url = `http://servico-gestao:3001/gestao/assinatura/${codAss}/ativo`;
         const resposta = await firstValueFrom(this.httpService.get<boolean>(url));
         const ativo = resposta.data;
 
