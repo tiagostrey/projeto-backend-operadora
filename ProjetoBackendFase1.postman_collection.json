@@ -8,7 +8,7 @@
   },
   "item": [
     {
-      "name": "Listar Clientes",
+      "name": "Listar todos os clientes cadastrados",
       "request": {
         "method": "GET",
         "header": [],
@@ -28,7 +28,7 @@
       "response": []
     },
     {
-      "name": "Listar Planos",
+      "name": "Listar todos os planos cadastrados",
       "request": {
         "method": "GET",
         "header": [],
@@ -48,13 +48,13 @@
       "response": []
     },
     {
-      "name": "Criar Assinatura",
+      "name": "Criar uma assinatura",
       "request": {
         "method": "POST",
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n  \"codCli\": 1,\r\n  \"codPlano\": 1,\r\n  \"custoFinal\": 80.0,\r\n  \"descricao\": \"Assinatura via Postman\",\r\n}",
+          "raw": "{\r\n  \"codCli\": 1,\r\n  \"codPlano\": 1,\r\n  \"custoFinal\": 80.0,\r\n  \"descricao\": \"Assinatura via Postman\"\r\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -77,7 +77,7 @@
       "response": []
     },
     {
-      "name": "Atualiza Custo Mensal do Plano",
+      "name": "Atualizar o custo mensal do plano",
       "request": {
         "method": "PATCH",
         "header": [],
@@ -107,7 +107,7 @@
       "response": []
     },
     {
-      "name": "Lista Assinatura de um Tipo (TODOS)",
+      "name": "Retorna a lista com todas as assinaturas de um determinado tipo",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
@@ -135,63 +135,7 @@
       "response": []
     },
     {
-      "name": "Lista Assinatura de um Tipo (CANCELADOS)",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "method": "GET",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": ""
-        },
-        "url": {
-          "raw": "http://localhost:3000/gestao/assinaturas/cancelados",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "3000",
-          "path": [
-            "gestao",
-            "assinaturas",
-            "cancelados"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Lista Assinatura de um Tipo (ATIVOS)",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "method": "GET",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": ""
-        },
-        "url": {
-          "raw": "http://localhost:3000/gestao/assinaturas/ATIVOS",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "3000",
-          "path": [
-            "gestao",
-            "assinaturas",
-            "ATIVOS"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Lista Assinaturas de um Cliente",
+      "name": "Retorna a lista das assinaturas do cliente informado",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
@@ -219,7 +163,7 @@
       "response": []
     },
     {
-      "name": "Lista Assinaturas de um Plano",
+      "name": "Retorna a lista de assinaturas de um plano",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
@@ -247,7 +191,7 @@
       "response": []
     },
     {
-      "name": "Registrar Pagamento",
+      "name": "Solicita o registro de um pagamento",
       "request": {
         "method": "POST",
         "header": [],
@@ -275,7 +219,7 @@
       "response": []
     },
     {
-      "name": "Verificar Plano Ativo",
+      "name": "Retorna se plano questionado permanece ativo",
       "request": {
         "method": "GET",
         "header": [],
